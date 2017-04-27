@@ -1,0 +1,32 @@
+<!-- <form action="/users" method="post" accept-charset="UTF-8">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  Username: <input type="text" name="user[username]"><br>
+  Email: <input type="text" name="user[email]"><br>
+  Password: <input type="password" name="user[password]"><br>
+  <input type="submit" value="Submit">
+</form> -->
+
+<!-- <%= form_tag('/users', method: "post") do %>
+  <%= label_tag :username %>
+  <%= text_field_tag :username %><br>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %><br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+<% end %> -->
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <p>This form contains <%= pluralize(@user.errors.count, "error") %>.
+    </p>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  Username: <%= f.text_field :username %><br>
+  Email: <%= f.text_field :email, placeholder: "Your email here" %><br>
+  Password <%= f.password_field :password %><br>
+  <%= f.submit %>
+<% end %>
